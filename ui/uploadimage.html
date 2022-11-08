@@ -1,0 +1,40 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Test</title>
+</head>
+
+<body>
+  <form id="uploadform" action="/uploadImages" method="post" enctype="multipart/form-data">
+    <input type="file" id="images" name="images" multiple data-max="2" accept="image/jpg, image/jpeg, image/png" >
+    <input type="submit" id="submit">
+  </form>
+
+  <textarea id="box">Here should be data returned from FastAPI response</textarea>
+  <script>
+    const box = document.getElementById("box");
+
+    uploadform.onsubmit = async (e) => {
+      e.preventDefault();
+
+      let res = await fetch("/uploadImages", {
+        method: "POST",
+        body: new FormData(uploadform),
+      });
+
+      if (res.ok) {
+        let result = await res.text();
+        box.innerHTML = result;
+      } else {
+        box.innerHTML = `Response error: ${res.status}`;
+      };
+    };
+  </script>
+
+
+
+</body>
+</html>
