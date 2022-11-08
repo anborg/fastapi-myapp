@@ -23,7 +23,7 @@ def index(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
 
-@api_app.post(path="/uploadImages")
+@api_app.post(path="/uploadFiles")
 async def extract_data_from_images(images: List[UploadFile] = File(...)):
     return f"Name: {images[0].filename}, now: {datetime.now()}"
 

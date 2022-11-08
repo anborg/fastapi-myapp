@@ -3,12 +3,11 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-
-  <title>Test</title>
+  <title>Upload Files</title>
 </head>
 
 <body>
-  <form id="uploadform" action="/uploadImages" method="post" enctype="multipart/form-data">
+  <form id="form_uploadFile" action="/api/uploadFiles" method="post" enctype="multipart/form-data">
     <input type="file" id="images" name="images" multiple data-max="2" accept="image/jpg, image/jpeg, image/png" >
     <input type="submit" id="submit">
   </form>
@@ -20,9 +19,9 @@
     uploadform.onsubmit = async (e) => {
       e.preventDefault();
 
-      let res = await fetch("/uploadImages", {
+      let res = await fetch("/api/uploadFiles", {
         method: "POST",
-        body: new FormData(uploadform),
+        body: new FormData(form_uploadFile),
       });
 
       if (res.ok) {
